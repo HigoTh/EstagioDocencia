@@ -1,0 +1,54 @@
+% Encoding: UTF-8
+
+@Book{Alencar04,
+  title     = {Telefonia {C}elular},
+  publisher = {Editora {\'E}rica Ltda.},
+  year      = {2004},
+  author    = {Marcelo Sampaio de Alencar},
+  address   = {Tatuap{\'e}, SP},
+}
+
+@Book{Goldsmith05,
+  title     = {Wireless {C}ommunications},
+  publisher = {Cambridge University Press},
+  year      = {2005},
+  author    = {Andrea Goldsmith},
+  address   = {Nova Iorque, NY},
+}
+
+@Book{Proakis08,
+  title     = {Digital {C}ommunications},
+  publisher = {McGraw-Hill},
+  year      = {2008},
+  author    = {Jonh G. Proakis and Masoud Salehi},
+  editor    = {Michael Hackett},
+  address   = {Nova Iorque, NY},
+  edition   = {5a},
+}
+
+@Book{Molisch11,
+  title     = {Wireless {C}ommunications},
+  publisher = {Jonh Wiley and Sons},
+  year      = {2011},
+  author    = {Andreas F. Molisch},
+  edition   = {1a},
+}
+
+@Book{Stuber02,
+  title     = {Principles of {M}obile {C}ommunications},
+  publisher = {Kluwer Academic},
+  year      = {2002},
+  author    = {Gordon L. St{\"u}ber},
+  address   = {Atlanta, GE},
+  edition   = {2a},
+}
+
+@Book{Pimentel07,
+  title     = {Comunica{\c{c}}{\~a}o {D}igital},
+  publisher = {Brasport Livros e Multim{\'i}dia Ltda.},
+  year      = {2007},
+  author    = {Cecilio Jos{\'e} Lins Pimentel},
+  address   = {Rio de Janeiro},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

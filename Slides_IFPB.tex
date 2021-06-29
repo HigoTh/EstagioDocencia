@@ -1,0 +1,396 @@
+\documentclass{beamer}
+%\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx,url}
+\usepackage{lmodern}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage{epstopdf}
+\usepackage{graphicx}	
+\usepackage[all]{xy}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{epstopdf}
+\usepackage{amssymb}
+\usepackage{animate}
+
+\newcommand{\pag}[1] {\begin{frame}#1\end{frame}}
+\newcommand{\nologo}{\setbeamertemplate{logo}{}} % command to set the logo to nothing
+\usetheme[secheader]{Madrid}
+
+\title
+{Esquemas de Modulação Digital}
+
+\author[Silva]
+{Prof. Higo~Thaian~Pereira~da~Silva \\ higo.silva@cear.ufpb.br}
+
+\institute[UFPB,UFCG]{
+  \inst{1}%
+	Graduado em engenharia elétrica com ênfase em eletrônica \\
+  	Universidade Federal da Paraíba (UFPB)
+  \and
+  \inst{2}%
+	Mestrando em engenharia elétrica com ênfase em eletrônica e telecomunicações\\
+   Universidade Federal de Campina Grande (UFCG)
+}
+
+\date[Concurso Público, IFPB 2018]{IFPB, 13 de Dezembro de 2018} 
+\logo{\includegraphics[scale=0.5]{Logo_IFPB.png}}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+  \frametitle{Table of Contents}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+\section{Introdução}
+{\nologo
+\pag{
+	\frametitle{Introdução}
+	\begin{itemize}
+		\item Os avanços em \textit{hardware} e em processamento digital de sinais tornaram os \textbf{sistemas de comunicações digitais} mais baratos, rápidos e mais eficientes quanto ao consumo energético, que os \textbf{sistemas de comunicações analógicos} \cite{Alencar04,Goldsmith05};
+		\item A modulação digital apresenta várias vantagens em relação a modulação analógica, como por exemplo \cite{Goldsmith05}: 
+		\begin{itemize}
+			\item Maiores taxas de dados;
+			\item Maior eficiência espectral;
+			\item Aplicação de robustas técnicas de correção de erros;
+			\item Menor vulnerabilidade às limitações impostas pelo canal;
+			\item Melhor adequação à criptografia;
+		\end{itemize}
+		\item Por estes motivos, todos os sistemas de comunicações sem fio modernos, em atuação ou propostos, empregam modulação digital.
+	\end{itemize}
+}
+}
+
+\pag{
+	\frametitle{Introdução}
+	\begin{itemize}
+		\item Os dados digitais são usualmente representados na forma de um \textbf{fluxo de dados binários} (sequências de 0s e 1s) \cite{Proakis08};
+		\item Independente de qual é a natureza original dos dados, analógica (convertido por um processo A-D) ou digital, o objetivo é \textbf{adequar a transmissão dos dados digitais} ao canal de comunicações;
+		\item Sendo assim, o processo de mapear uma sequência digital em formas de onda para transmissão no canal de comunicações é chamado de \textbf{modulação digital} \cite{Proakis08,Molisch11}.
+	\end{itemize}
+}
+
+\pag{
+	\frametitle{Introdução}
+	\begin{itemize}
+		\item A informação do sinal mensagem pode ser transmitido na \textbf{amplitude}, \textbf{frequência} ou \textbf{fase} da portadora, tão como em uma combinação dessas características \cite{Stuber02};
+		\item O formato de modulação deve transmitir com as dadas \textbf{limitações energéticas} o máximo de informação possível em um canal com \textbf{limitações em largura de banda};
+		\item O formato de modulação também deve garantir uma qualidade de transmissão, minimizando a \textbf{probabilidade de erro de bit}.
+	\end{itemize}
+
+}
+
+\pag{
+	\frametitle{Introdução}
+	\begin{itemize}
+		\item O projeto de um formato de modulação depende dos seguintes critérios adicionais \cite{Molisch11,Alencar04}:
+		\begin{itemize}
+			\item \textbf{Eficiência espectral}: maximizar a transmissão de informação para uma dada limitação em largura de banda;
+			\item \textbf{Interferência entre canais adjacentes}: o espectro de potência deve ser minimizado nas faixas laterais;
+			\item \textbf{Sensibilidade ao ruído}: minimizar a sensibilidade ao ruído;
+			\item \textbf{Envoltória do sinal}: estudar se formato de modulação deve possuir envoltória constante ou não-constante.
+		\end{itemize} 
+	\end{itemize}
+}
+
+\subsection{Objetivos}
+\pag{
+	\frametitle{Objetivos da Apresentação}
+	\begin{itemize}
+		\item Introduzir os conceitos básicos necessários ao entendimento das modulações digitais;
+		\item Apresentar os esquemas de modulação mais básicos, necessários para entendimento da modulação QAM;
+		\item Apresentar os conceitos básicos do esquema de modulação QAM, discutindo suas características.
+	\end{itemize}
+}
+
+
+\section{Conceitos Preliminares}
+
+\subsection{Conceitos Básicos}
+\pag{
+	\frametitle{Conceitos Básicos}
+	\begin{itemize}
+		\item Diversas análises relacionadas a modulação digital utilizam o conceito de \textbf{espaço de sinais};
+		\item Neste contexto, duas definições fundamentais devem ser compreendidas:
+		\begin{block}{Energia de um Sinal}
+			\begin{equation}
+				E_{x} = \int_{T}x(t)^2dt;
+			\end{equation}
+		\end{block} 
+		\begin{block}{Produto Interno entre Sinais}
+			\begin{equation}
+				\langle x(t),y(t) \rangle = \int_{T}x(t)y(t)dt.
+			\end{equation}
+		\end{block}
+	\end{itemize}
+}
+
+\subsection{Representação de Sinais por Funções Básicas}
+{\nologo
+\pag{
+	\frametitle{Representação de Sinais por Funções Básicas}
+	\begin{itemize}
+		\item Em sistemas de transmissão digital, os sinais transmitidos em cada intervalo de tempo, com duração $T$~s, pertencem a um espaço vetorial com $M$ sinais reais $\mathcal{S} = \{s_{1}(t),\cdots,s_{M}(t)\}$;
+		\item Os sinais pertencentes ao conjunto $\mathcal{S}$ podem ser descritos como uma combinação linear de $N$ \textbf{funções bases}, $\mathcal{B} =\{\varphi_{1}(t),\cdots,\varphi_{N}(t)\}$;
+		\item As funções bases formam uma \textbf{base ortonormal de funções}, com as seguintes propriedades:
+		\begin{block}{Produto Interno}
+			\begin{equation}
+				\int_{T}\varphi_{i}(t)\varphi_{j}(t)dt = 0,\;\text{se $i\neq j$;}
+			\end{equation}
+		\end{block}
+				\begin{block}{Energia}
+			\begin{equation}
+				\int_{T}\varphi_{i}(t)^2dt = 1, i\in \{1,\cdots,N\}.
+			\end{equation}
+		\end{block}
+	\end{itemize}
+}
+}
+
+\pag{
+	\frametitle{Representação de Sinais por Funções Básicas}
+	\begin{itemize}
+		\item Os sinais do conjunto $\mathcal{S} = \{s_1(t),\cdots,s_{M}(t)\}$ podem ser descritos a partir das funções bases por:
+		\begin{block}{Combinação Linear}
+			\begin{equation}
+				s_{i}(t) = \sum_{j = 1}^{N}s_{ij}\varphi_{j}(t),
+			\end{equation}
+		\end{block}
+em que, $s_{ij}$ é a \textbf{projeção} do sinal $s_{i}(t)$ na base $\varphi_{j}(t)$;
+		\item A projeção $s_{ij}$ é calculada diretamente pelo produto interno entre a função $s_{i}(t)$ e a função base $\varphi_{j}(t)$:
+		\begin{block}{Produto Interno entre  $s_{i}(t)$ e $\varphi_{j}(t)$}
+			\begin{equation}
+				s_{ij} = \int_{T}s_{i}(t)\varphi_{j}(t)dt.
+			\end{equation}
+		\end{block}
+	\end{itemize}
+}
+
+\subsection{Modulador Digital}
+{\nologo
+\pag{
+	\frametitle{Modulador Digital}
+	\begin{itemize}
+		\item O modulador digital realiza o mapeamento entre uma sequência de bits e um conjunto de $M$ formas de onda que diferem entre si em amplitude, fase ou frequência \cite{Pimentel07};
+		\item Para uma sequência de $k$ \textit{bits}, o número de sinais mapeados é $M = 2^{k}$;
+		\item Cada sinal é transmitido a cada $T$~s, em que $T$ é chamado de \textbf{tempo de símbolo};
+		\item A cada tempo de símbolo, $k$ \textit{bits} são transmitidos:
+		\begin{block}{Tempo de \textit{bit}}
+			\begin{equation}
+				T_{b} = \frac{T}{k}.
+			\end{equation}
+		\end{block}
+	\end{itemize}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.7\linewidth]{Modulador.pdf}
+				\label{Modulador}
+			\end{figure}
+}
+}
+
+\pag{
+	\frametitle{Modulador Digital}
+	\begin{itemize}
+		\item A energia média para transmissão de um \textbf{símbolo} é dada por:
+			\begin{block}{Energia Média do Símbolo Binário}
+				\begin{equation}
+					\overline{E}_s = \frac{1}{M}\sum_{i = 1}^{M}E_{s_i},
+				\end{equation}
+			\end{block}
+sendo $E_{s_i}$ a energia do $i$-ésimo símbolo binário;
+		\item A energia média para transmissão de um \textit{bit} é calculada por:
+		\begin{block}{Energia Média do Símbolo Binário}
+				\begin{equation}
+					{E}_b = \frac{\overline{E}_{s_i}}{\log_2(M)}.
+				\end{equation}
+		\end{block}
+	\end{itemize}
+
+}
+
+
+\section{Esquemas Básicos de Modulação Digital}
+
+\subsection{Modulação ASK}
+\pag{
+	\frametitle{Modulação ASK (\textit{Amplitude-Shift Keying})}
+	\begin{itemize}
+		\item No esquema de modulação ASK, a mensagem binária é modulada na amplitude da portadora, sendo os sinais representados na forma:
+		\begin{block}{Sinal ASK}
+			\begin{equation}
+				s_{i}(t) = A_i\sqrt{\frac{2}{E_{g}}}g(t)\cos(2\pi f_c t),
+			\end{equation}
+			\begin{itemize}
+				\item \textbf{Amplitude modulada}: $A_{i} = (2i - 1 - M)d,\;i\in\{1,2,\dots,M\}$; 
+				\item \textbf{Pulso de formatação com energia} $E_{g}$: $g(t)$;
+				\item \textbf{Frequência da portadora}: $f_{c}$;
+				\item \textbf{Dimensão no espaço de sinais}: $N = 1$;
+				\item \textbf{Função base}: $\varphi_1(t) = \sqrt{\frac{2}{E_{g}}}g(t)\cos(2\pi f_c t)$.
+			\end{itemize}
+		\end{block} 
+	\end{itemize}
+}
+
+\pag{
+	\frametitle{Exemplo de Sinal ASK ($k = 2$~\textit{bits}, $M = 4$)}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.7\linewidth]{SinalASK.pdf}
+				\label{SinalASK}
+			\end{figure}
+}
+
+\pag{
+	\frametitle{Constelações ASK (Codificação Gray)}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.75\linewidth]{ConstASK.pdf}
+				\label{ConstASK}
+			\end{figure}
+}
+
+\subsection{Modulação PSK}
+\pag{
+	\frametitle{Modulação PSK (\textit{Phase-Shift Keying})}
+	\begin{itemize}
+		\item No esquema de modulação PSK os sinais do conjunto $\mathcal{S}$ possuem a mesma amplitude (envoltória constante) e fases diferentes para cada mensagem: 
+		\begin{block}{Sinal PSK}
+			\begin{equation}
+				s_{i}(t) = \sqrt{\frac{2E_s}{E_g}}g(t)\cos\left(2\pi f_c t + \frac{(2i - 1)\pi}{M}\right),
+			\end{equation}
+			\begin{itemize}
+				\item \textbf{Fase modulada}: $\phi_i = \frac{(2i - 1)\pi}{M},\; \;i\in\{1,2,\cdots,M\}$;
+				\item \textbf{Energia do sinal} $s_{i}(t)$: $E_{s}$;
+				\item \textbf{Dimensão no espaço de sinais}: $N = 2$;
+				\item \textbf{Funções base}: $\varphi_{1}(t) = \sqrt{\frac{2}{E_g}}g(t)\cos(2\pi f_c t),\;\varphi_{2}(t) = -\sqrt{\frac{2}{E_g}}g(t)\sin(2\pi f_c t)$.
+			\end{itemize}
+		\end{block} 
+	\end{itemize}
+}
+
+{\nologo
+\pag{
+	\frametitle{Exemplo de Sinal PSK ($k = 2$~\textit{bits}, $M = 4$)}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.8\linewidth]{SinalPSK.pdf}
+				\label{SinalPSK}
+			\end{figure}
+}
+}
+
+\pag{
+	\frametitle{Constelações PSK (Codificação Gray)}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.85\linewidth]{ConstPSK.pdf}
+				\label{ConstPSK}
+			\end{figure}
+}
+
+\section{Modulação em Quadratura}
+
+\pag{
+	\frametitle{Modulação em Quadratura -- QAM (Quadrature Amplitude Modulation)}
+		\begin{itemize}
+			\item Os sinais modulados no esquema QAM possuem o seguinte formato:
+			\begin{block}{Sinal QAM}
+			\begin{equation}
+				s_i(t) = A_i\sqrt{\frac{2}{E_g}}g(t)\cos(2\pi f_c t) - B_i\sqrt{\frac{2}{E_g}}g(t)\sin(2\pi f_c t),
+			\end{equation}
+				\begin{itemize}
+					\item \textbf{Amplitude da portadora em fase}: $A_i = (2i - \sqrt{M} - 1)d,\;i\in \{1,2,\cdots,\sqrt{M}\}$; 
+					\item \textbf{Amplitude da portadora em quadratura}: $B_i = (2i - \sqrt{M} - 1)d,\;i\in \{1,2,\cdots,\sqrt{M}\}$; 
+					\item \textbf{Dimensão no espaço de sinais}: N = 2;
+					\item \textbf{Funções base}: $\varphi_1 = \sqrt{\frac{2}{E_g}}g(t)\cos(2\pi f_c t),\;\varphi_2 = \sqrt{\frac{2}{E_g}}g(t)\sin(2\pi f_c t)$.
+				\end{itemize}
+		\end{block}
+	\end{itemize}
+}
+
+{\nologo
+\pag{
+	\frametitle{Modulação em Quadratura -- QAM (Quadrature Amplitude Modulation)}
+	\begin{itemize}
+		\item O sinal QAM também pode ser representado no seguinte formato:
+		\begin{block}{Sinal QAM}
+			\begin{equation}
+				s_i(t) = V_i\sqrt{\frac{2}{E_g}}g(t)\cos\left(2\pi f_c t + \phi_i\right),
+			\end{equation}
+			\begin{itemize}
+				\item \textbf{Amplitude modulada}: $V_{i} = \sqrt{A_i^2 + B_i^2}$
+				\item \textbf{Fase modulada}: $\phi_i = \tan^{-1}\left(\frac{B_i}{A_i}\right)$.
+			\end{itemize}
+		\end{block}
+		\item No esquema de modulação QAM, os bits de informação são utilizados para modular simultaneamente a \textbf{fase} e a \textbf{amplitude} do sinal transmitido \cite{Alencar04}.
+	\end{itemize}
+}
+}
+
+{\nologo
+\pag{
+	\frametitle{Modulador QAM}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.95\linewidth]{QAMMod.pdf}
+				\label{QAMMod}
+			\end{figure}
+}
+}
+
+{\nologo
+\pag{
+	\frametitle{Exemplo de Sinal QAM ($k = 4$~\textit{bits}, $M = 16$)}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.85\linewidth]{SinalQAM.pdf}
+				\label{SinalQAM}
+			\end{figure}
+}
+}
+
+{\nologo
+\pag{
+	\begin{center}
+		\resizebox{0.7\textwidth}{!}{%
+  		\animategraphics[autoplay,loop]{1}{ConstVariation}{}{}
+		}
+	\end{center}
+}
+}
+
+
+{\nologo
+\pag{
+	\frametitle{Probabilidade de Erro de Bit -- QAM}
+			\begin{figure}[!h]
+				\centering
+			  \includegraphics[width = 0.7\linewidth]{BEPQAM.pdf}
+				\label{BEPQAM}
+			\end{figure}
+}
+}
+
+
+{\nologo
+\section{Referências}
+\pag{
+	\frametitle{Referências}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,refs}
+}
+}
+
+\end{document}
